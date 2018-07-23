@@ -3,11 +3,13 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule }    from '@angular/common/http';
 
 import { AppComponent } from './app.component';
+import { TotalPercentComponent } from './components/total-percent/total-percent.component';
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    TotalPercentComponent
   ],
   imports: [
     BrowserModule,
