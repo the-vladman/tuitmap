@@ -25,12 +25,9 @@ export class AppComponent implements OnInit{
   source: XYZ;
   layer: TileLayer;
   view: View;
-  totalTuits:number;
-  totalTuitsWithCoordinates:number;
   tuits: Tuit[];
-  tuitPoints:any[];
   private arrayOfFeatures: Feature[] = [];
-  constructor(private heroService: TuitsService) {}
+  constructor(private tuitsService: TuitsService) {}
 
   ngOnInit() {
     this.source = new OSM();
@@ -40,21 +37,21 @@ export class AppComponent implements OnInit{
     this.view = new View({
       projection: "EPSG:4326",
       center: [-101.9563, 23.6257],
-      zoom: 3
+      zoom: 4
     });
     this.map = new Map({
       target: 'map',
       layers: [this.layer],
       view: this.view
     });
-    this.getTotalTuits()
     this.getTuits();
   }
   getTuits(): void {
-   this.heroService.getTuits()
+   this.tuitsService.getTuits()
    .subscribe(response =>{
      this.tuits = response;
      response.forEach(tuit => {
+       const tuitMarker = this.createTuitMarker(tuit);
        this.arrayOfFeatures.push(tuitMarker)
      });
      this.tuitsSource = new VectorSource({ features: this.arrayOfFeatures});
@@ -63,23 +60,13 @@ export class AppComponent implements OnInit{
    })
  }
 
- getTotalTuits(): void {
-  this.heroService.getTotalTuits()
-  .subscribe(response => this.totalTuits)
-}
-
-getTotalTuitsWithCoordinates(): void {
- this.heroService.getTotalTuitsWithCoordinates()
- .subscribe(response => this.totalTuitsWithCoordinates)
-}
-
  setStyle():void{
    return new Style({
           image: new CircleStyle({
-            radius: 1,
-            fill: new Fill({color: 'black'}),
+            radius: 4,
+            fill: new Fill({color: '#EB675B'}),
             stroke: new Stroke({
-              color: 'blue', width: 5
+              color: '#A1D6FF', width: 1
             })
           })
         });
