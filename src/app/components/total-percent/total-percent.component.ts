@@ -79,9 +79,9 @@ export class TotalPercentComponent implements OnInit{
 
   private populatePie(arcSelection: d3.Selection<d3.pie.Arc>): void {
     let pieColor = d3.scaleOrdinal()
-      .range(['#EB675B','#F9A960']);
+      .range(['#EB675B','#36039C']);
     let pieColorTexts = d3.scaleOrdinal()
-      .range(['#F9A960','#EB675B']);
+      .range(['#36039C','#EB675B']);
     let arc = d3.arc<d3.pie.Arc>()
       .innerRadius(0)
       .outerRadius(this.radius);
