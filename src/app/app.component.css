@@ -5,7 +5,14 @@
 
 .total-percent {
   position: absolute;
-  bottom: 20px;
+  bottom: 30%;
+  left: 30px;
+  width: 15%;
+}
+
+.total-countries {
+  position: absolute;
+  bottom: 1%;
   left: 30px;
   width: 15%;
 }

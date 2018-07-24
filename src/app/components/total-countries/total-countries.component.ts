@@ -6,11 +6,11 @@ import { Observable, of } from 'rxjs';
 import { catchError, map, tap, switchMap } from 'rxjs/operators';
 
 @Component({
-  selector: 'app-total-percent',
-  templateUrl: './total-percent.component.html',
-  styleUrls: ['./total-percent.component.css']
+  selector: 'app-total-countries',
+  templateUrl: './total-countries.component.html',
+  styleUrls: ['./total-countries.component.css']
 })
-export class TotalPercentComponent implements OnInit{
+export class TotalCountriesComponent implements OnInit {
   @ViewChild("containerPieChart") element: ElementRef;
 
   totalTuits: number;
@@ -31,11 +31,12 @@ export class TotalPercentComponent implements OnInit{
   getValues(): void {
     this.getTotalValues()
       .subscribe(values => {
+        console.log(values)
         this.arrayOfPercents = values;
         this.arrayOfPercents.forEach(t => {
           if (t.label != 'total') {
             this.pieData.push(t)
-          } else{
+          } else {
             this.totalTuits = t.total;
           }
         });
@@ -46,13 +47,13 @@ export class TotalPercentComponent implements OnInit{
         this.buildPie();
       });
   }
-  getTotalValues():void{
-    return this.tuitsService.getTotalValues();
+  getTotalValues(): void {
+    return this.tuitsService.getTotalCountries();
   }
 
   private setup(): void {
-    this.width = 200;
-    this.height = 200;
+    this.width = 180;
+    this.height = 180;
     this.radius = Math.min(this.width, this.height) / 2;
   }
 
@@ -78,8 +79,6 @@ export class TotalPercentComponent implements OnInit{
   }
 
   private populatePie(arcSelection: d3.Selection<d3.pie.Arc>): void {
-    let pieColorTexts = d3.scaleOrdinal()
-      .range(['#EB675B','#36039C']);
     let arc = d3.arc<d3.pie.Arc>()
       .innerRadius(30)
       .outerRadius(this.radius);
@@ -95,8 +94,6 @@ export class TotalPercentComponent implements OnInit{
       })
       .text((datum, index) => datum.data.total)
       .style("text-anchor", "middle")
-      .attr("fill", (datum, index) => {
-        return pieColorTexts(`${index}`);
-      });
+      .attr("fill",'white');
   }
 }
