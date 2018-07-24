@@ -4,13 +4,13 @@ import { Observable, of } from 'rxjs';
 import { catchError, map, tap, switchMap } from 'rxjs/operators';
 import { Tuit } from '../models/tuit';
 import { Percent } from '../models/percent';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TuitsService {
-  private tuitsUrl = 'https://api.datos.gob.mx/v2/tuits';
-  // private tuitsUrl = 'https://api.datos.gob.mx/v2/tuits?coordinates.coordinates';
+  private tuitsUrl = environment.apiUrl;
   constructor(private http: HttpClient) { }
 
   getTotalValues(){
