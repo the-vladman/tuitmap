@@ -22,6 +22,7 @@ import { Tuit } from './models/tuit';
 export class AppComponent implements OnInit {
   map: Map;
   tuitsLayer: VectorLayer;
+  tuitsCountriesLayer: VectorLayer;
   tuitsSource: VectorSource;
   source: XYZ;
   layer: TileLayer;
@@ -41,42 +42,25 @@ export class AppComponent implements OnInit {
         url: 'https://raw.githubusercontent.com/openlayers/ol3/6838fdd4c94fe80f1a3c98ca92f84cf1454e232a/examples/data/geojson/countries.geojson'
       }),
       style: function(feature, res){
-        // replace "Germany" with any country name you would like to display...
         switch(feature.get('name')){
-          case 'Mexico':{
+          case 'United States of America':{
             return new Style({
-                fill: new Fill({ color: '#FFB803' }),
-                // stroke: new Stroke({
-                //     color: '#FFB803',
-                //     width: 2
-                // })
+                fill: new Fill({ color: '#FFB803' })
             });
           }
           case 'Belize':{
             return new Style({
-                fill: new Fill({ color: '#9D1006' }),
-                // stroke: new Stroke({
-                //     color: '#9D1006',
-                //     width: 2
-                // })
+                fill: new Fill({ color: '#9D1006' })
             });
           }
-          case 'United States of America':{
+          case 'Mexico':{
             return new Style({
-                fill: new Fill({ color: '#FA9500' }),
-                // stroke: new Stroke({
-                //     color: '#FA9500',
-                //     width: 2
-                // })
+                fill: new Fill({ color: '#FA9500' })
             });
           }
           case 'Guatemala':{
             return new Style({
-                fill: new Fill({ color: '#F64905' }),
-                // stroke: new Stroke({
-                //     color: '#F64905',
-                //     width: 2
-                // })
+                fill: new Fill({ color: '#F64905' })
             });
           }
         }
@@ -111,7 +95,7 @@ export class AppComponent implements OnInit {
   setStyle(): void {
     return new Style({
       image: new CircleStyle({
-        radius: 4,
+        radius: 5,
         fill: new Fill({ color: '#36039C' }),
         stroke: new Stroke({
           color: '#EB675B', width: 1

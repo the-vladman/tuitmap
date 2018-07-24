@@ -46,13 +46,13 @@ export class TotalPercentComponent implements OnInit{
         this.buildPie();
       });
   }
-  getTotalValues(): void {
+  getTotalValues():void{
     return this.tuitsService.getTotalValues();
   }
 
   private setup(): void {
-    this.width = 360;
-    this.height = 360;
+    this.width = 200;
+    this.height = 200;
     this.radius = Math.min(this.width, this.height) / 2;
   }
 
@@ -78,18 +78,14 @@ export class TotalPercentComponent implements OnInit{
   }
 
   private populatePie(arcSelection: d3.Selection<d3.pie.Arc>): void {
-    let pieColor = d3.scaleOrdinal()
-      .range(['#EB675B','#36039C']);
     let pieColorTexts = d3.scaleOrdinal()
-      .range(['#36039C','#EB675B']);
+      .range(['#EB675B','#36039C']);
     let arc = d3.arc<d3.pie.Arc>()
-      .innerRadius(0)
+      .innerRadius(30)
       .outerRadius(this.radius);
     arcSelection.append("path")
       .attr("d", arc)
-      .attr("fill", (datum, index) => {
-        return pieColor(`${index}`);
-      });
+      .attr("fill", (datum, index) => datum.data.color);
 
     arcSelection.append("text")
       .attr("transform", (datum: any) => {
