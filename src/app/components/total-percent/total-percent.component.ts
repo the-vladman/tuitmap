@@ -29,7 +29,7 @@ export class TotalPercentComponent implements OnInit{
   }
 
   getValues(): void {
-    this.getTotalValues()
+    this.tuitsService.getTotalValues()
       .subscribe(values => {
         this.arrayOfPercents = values;
         this.arrayOfPercents.forEach(t => {
@@ -45,9 +45,6 @@ export class TotalPercentComponent implements OnInit{
         this.buildSVG();
         this.buildPie();
       });
-  }
-  getTotalValues():void{
-    return this.tuitsService.getTotalValues();
   }
 
   private setup(): void {

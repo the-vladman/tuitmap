@@ -29,9 +29,8 @@ export class TotalCountriesComponent implements OnInit {
   }
 
   getValues(): void {
-    this.getTotalValues()
+    this.tuitsService.getTotalCountries()
       .subscribe(values => {
-        console.log(values)
         this.arrayOfPercents = values;
         this.arrayOfPercents.forEach(t => {
           if (t.label != 'total') {
@@ -46,9 +45,6 @@ export class TotalCountriesComponent implements OnInit {
         this.buildSVG();
         this.buildPie();
       });
-  }
-  getTotalValues(): void {
-    return this.tuitsService.getTotalCountries();
   }
 
   private setup(): void {
